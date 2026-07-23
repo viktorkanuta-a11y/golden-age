@@ -1,6 +1,6 @@
-/* Golden Age addons v5 */
+/* Golden Age addons v6 */
 (function () {
-  var FORM_ENDPOINT = "https://formspree.io/f/FORMSPREE_ID"; // заменить на реальный код Formspree
+  var FORM_ENDPOINT = "https://formspree.io/f/xlgqpjpo"; // заменить на реальный код Formspree
 
   var T = {
     ru: {
@@ -17,7 +17,12 @@
       noform: "Форма ещё не подключена.",
       onreq: "по запросу",
       npv: "чистая приведённая стоимость",
-      irr: "внутренняя норма доходности"
+      statEnergy: "Снижение энергозатрат на помол — Импульс",
+      statRes: "Экономия энергии и ГСМ — Гром",
+      more: "Подробнее о технологиях →",
+      pgTech: "Технологии подробно",
+      pgPath: "Путь компании",
+      irr: "доходность проекта, % годовых"
     },
     en: {
       btn: "Contact",
@@ -33,7 +38,12 @@
       noform: "The form is not connected yet.",
       onreq: "on request",
       npv: "net present value",
-      irr: "internal rate of return"
+      statEnergy: "Grinding energy reduction — Impulse",
+      statRes: "Energy & fuel savings — Grom",
+      more: "More about technologies →",
+      pgTech: "Technologies in detail",
+      pgPath: "Company path",
+      irr: "project return, % per annum"
     }
   };
 
@@ -69,7 +79,11 @@
     ov.querySelector(".ga-msg").textContent = "";
     ov.classList.add("ga-show");
   }
-  function closeModal() { ov.classList.remove("ga-show"); }
+  function closeModal() {
+    ov.classList.remove("ga-show");
+    var ps = document.querySelectorAll(".ga-price.ga-open"), k;
+    for (k = 0; k < ps.length; k++) { ps[k].classList.remove("ga-open"); ps[k].textContent = ps[k].dataset.gaOrig || ps[k].textContent; }
+  }
   ov.querySelector(".ga-x").addEventListener("click", closeModal);
   ov.addEventListener("click", function (e) { if (e.target === ov) closeModal(); });
 
@@ -96,6 +110,13 @@
   });
 
   var isTouch = window.matchMedia("(hover: none)").matches;
+
+  /* v6-27: клик/тап вне цены возвращает размытие */
+  document.addEventListener("click", function (e) {
+    if (e.target.closest && e.target.closest(".ga-price")) return;
+    var ps = document.querySelectorAll(".ga-price.ga-open"), k;
+    for (k = 0; k < ps.length; k++) { ps[k].classList.remove("ga-open"); ps[k].textContent = ps[k].dataset.gaOrig || ps[k].textContent; }
+  }, true);
 
   /* ---------- улучшения внутри React-дерева ---------- */
   function enhance() {
@@ -148,6 +169,63 @@
       }
     }
 
+
+    /* v6-32: подписи установок к цифрам первого экрана */
+    var stats = document.querySelectorAll("div.text-sm.text-gray-600.font-medium");
+    for (i = 0; i < stats.length; i++) {
+      el = stats[i];
+      var sv = el.textContent.trim();
+      if (sv === "Снижение энергозатрат" || sv === "Energy Reduction") { el.textContent = t("statEnergy"); }
+      if (sv === "Экономия ресурсов" || sv === "Resource Savings") { el.textContent = t("statRes"); }
+    }
+
+    /* v6-28: кнопка "Гром" в подвале ведёт к карточке Грома */
+    var fbtns = document.querySelectorAll("footer button");
+    for (i = 0; i < fbtns.length; i++) {
+      el = fbtns[i];
+      var ft = el.textContent.trim();
+      if ((ft === "Гром" || ft === "Grom") && !el.dataset.ga) {
+        el.dataset.ga = "1";
+        el.addEventListener("click", function (e) {
+          e.stopPropagation(); e.preventDefault();
+          var hs = document.querySelectorAll("h3"), k, tgt = null;
+          for (k = 0; k < hs.length; k++) {
+            var hx = hs[k].textContent.trim();
+            if (hx === "Гравитационное обогащение" || hx === "Gravitational Enrichment") { tgt = hs[k]; break; }
+          }
+          if (tgt) tgt.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, true);
+      }
+    }
+
+    /* v6: кнопка "Подробнее о технологиях" под секцией технологий */
+    var techSec = document.getElementById("technologies");
+    if (techSec && !document.querySelector(".ga-more")) {
+      var mre = document.createElement("a");
+      mre.className = "ga-more";
+      mre.href = "technologies.html";
+      techSec.appendChild(mre);
+    }
+    var mlink = document.querySelector(".ga-more");
+    if (mlink) mlink.textContent = t("more");
+
+    /* v6: ссылки на страницы в подвале */
+    var fuls = document.querySelectorAll("footer ul");
+    if (fuls.length >= 2) {
+      if (!fuls[0].querySelector(".ga-plink-tech")) {
+        var li1 = document.createElement("li");
+        li1.innerHTML = '<a class="ga-plink ga-plink-tech" href="technologies.html"></a>';
+        fuls[0].appendChild(li1);
+      }
+      if (!fuls[1].querySelector(".ga-plink-path")) {
+        var li2 = document.createElement("li");
+        li2.innerHTML = '<a class="ga-plink ga-plink-path" href="path.html"></a>';
+        fuls[1].appendChild(li2);
+      }
+      var a1 = document.querySelector(".ga-plink-tech"); if (a1) a1.textContent = t("pgTech");
+      var a2 = document.querySelector(".ga-plink-path"); if (a2) a2.textContent = t("pgPath");
+    }
+
     /* размытые цены: наведение -> "по запросу", клик -> форма */
     var prices = document.querySelectorAll("div.text-2xl.font-bold.text-gray-900");
     for (i = 0; i < prices.length; i++) {
@@ -157,6 +235,7 @@
       el.classList.add("ga-price");
       (function (p) {
         var orig = p.textContent;
+        p.dataset.gaOrig = orig;
         function reveal() { p.classList.add("ga-open"); p.textContent = t("onreq"); }
         function hide() { p.classList.remove("ga-open"); p.textContent = orig; }
         if (!isTouch) {

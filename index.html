@@ -15,7 +15,7 @@ div.text-3xl.inline-block{white-space:nowrap}
 /* 19: расшифровка NPV/IRR */
 .ga-sub{font-size:.72rem;color:#9ca3af;margin-top:2px;line-height:1.2}
 /* 26: размытая цена */
-.ga-price{filter:blur(7px);cursor:pointer;transition:filter .25s;user-select:none}
+.ga-price{filter:blur(5px);cursor:pointer;transition:filter .25s;user-select:none}
 .ga-price.ga-open{filter:none}
 /* модальная форма */
 .ga-ov{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px}
@@ -32,4 +32,25 @@ div.text-3xl.inline-block{white-space:nowrap}
 .ga-msg{font-size:13px;text-align:center;margin-top:8px}
 .ga-navbtn{background:linear-gradient(90deg,#f59e0b,#f97316);color:#fff;border:none;border-radius:999px;padding:8px 18px;font-size:14px;font-weight:bold;cursor:pointer;margin-left:10px;white-space:nowrap}
 @media (max-width:640px){.ga-navbtn{padding:7px 12px;font-size:12px;margin-left:6px}}
+
+/* v6-26: шапка всегда белая, надписи не наезжают */
+header{background:rgba(255,255,255,.94)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 1px 12px rgba(0,0,0,.07)}
+header .justify-between{gap:10px}
+@media (max-width:1200px){
+header .text-2xl{font-size:1.15rem!important}
+header nav>*+*{margin-left:1.1rem!important}
+header nav button{font-size:.85rem!important}
+}
+@media (max-width:860px){header nav>*+*{margin-left:.75rem!important}}
+/* v6-29: иконки контактов по центру строки */
+#contact .flex.items-start{align-items:center!important}
+/* v6-30: запрет выделения текста, кроме телефона, почты и полей формы */
+body{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+a[href^="tel:"],a[href^="mailto:"],input,textarea{-webkit-user-select:text!important;user-select:text!important}
+/* v6: кнопка "Подробнее о технологиях" под секцией технологий */
+.ga-more{display:block;width:max-content;margin:0 auto 8px;background:#fff;border:2px solid #f59e0b;color:#b45309;border-radius:999px;padding:12px 26px;font-size:16px;font-weight:bold;text-decoration:none;transition:all .2s}
+.ga-more:hover{background:linear-gradient(90deg,#f59e0b,#f97316);color:#fff}
+/* v6: ссылки на внутренние страницы в подвале */
+footer a.ga-plink{color:inherit;text-decoration:none}
+footer a.ga-plink:hover{color:#fbbf24}
 </style></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script defer src="./ga-addons.js"></script></body></html>

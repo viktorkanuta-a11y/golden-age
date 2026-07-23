@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Golden Age — технологии Импульс, Гром и Бриллиант подробно: принцип работы, сравнение, применение, экономика.">
+<title>Технологии подробно | Golden Age</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<style>
+:root{--am:#d97706;--or:#f97316;--ink:#111827;--mut:#6b7280}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:#fff;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+a[href^="tel:"],a[href^="mailto:"]{-webkit-user-select:text!important;user-select:text!important}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.grad{background:linear-gradient(90deg,#d97706,#eab308,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* шапка */
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);box-shadow:0 1px 12px rgba(0,0,0,.07)}
+.hrow{display:flex;align-items:center;justify-content:space-between;gap:10px;height:64px}
+.logo{font-size:1.35rem;font-weight:800;text-decoration:none;white-space:nowrap}
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+nav a{color:#374151;text-decoration:none;font-weight:500;font-size:.92rem}
+nav a:hover{color:var(--am)}
+nav a.on{color:var(--am)}
+.cta{background:linear-gradient(90deg,#f59e0b,#f97316);color:#fff;border-radius:999px;padding:8px 18px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap}
+@media(max-width:760px){nav{gap:12px}nav a{font-size:.8rem}.logo{font-size:1.05rem}.cta{padding:7px 12px;font-size:12px}}
+/* герой страницы */
+.phero{padding:130px 0 60px;background:linear-gradient(180deg,#fffbeb,#fff);position:relative;overflow:hidden}
+.phero::before{content:"";position:absolute;inset:0;background:url(./bg-tech.jpg) center/cover no-repeat;opacity:.16}
+.phero .wrap{position:relative}
+.phero h1{font-size:clamp(1.9rem,4.5vw,3rem);margin-bottom:12px}
+.phero p{color:var(--mut);font-size:1.1rem;max-width:640px}
+/* секции */
+section{padding:64px 0}
+section h2{font-size:clamp(1.6rem,3.4vw,2.3rem);margin-bottom:6px}
+.sub{color:var(--mut);margin-bottom:34px}
+.badge{display:inline-block;background:linear-gradient(90deg,#f59e0b,#f97316);color:#fff;border-radius:999px;padding:4px 14px;font-size:.8rem;font-weight:700;margin-bottom:14px}
+.card{background:#fff;border:1px solid #f3e8d0;border-radius:20px;padding:28px;box-shadow:0 8px 30px rgba(0,0,0,.05)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+ul.tick{list-style:none;margin-top:12px}
+ul.tick li{padding:7px 0 7px 30px;position:relative;color:#374151}
+ul.tick li::before{content:"✓";position:absolute;left:0;top:7px;width:20px;height:20px;border-radius:50%;background:#dcfce7;color:#16a34a;font-size:.75rem;display:flex;align-items:center;justify-content:center}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+.kpi{background:#fffbeb;border:1px solid #fde68a;border-radius:16px;padding:16px;text-align:center}
+.kpi b{display:block;font-size:1.5rem;background:linear-gradient(90deg,#d97706,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi span{font-size:.8rem;color:var(--mut)}
+.alt{background:linear-gradient(180deg,#fff,#fffbeb)}
+/* сравнение гидроциклонов */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.08)}
+@media(max-width:820px){.vs{grid-template-columns:1fr}}
+.vs>div{padding:28px}
+.vs .old{background:#f9fafb}
+.vs .new{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff}
+.vs h3{margin-bottom:14px;font-size:1.15rem}
+.vs ol{margin-left:18px;display:grid;gap:10px;font-size:.95rem}
+.vs .old ol{color:#4b5563}
+/* заметка */
+.note{background:#fff7ed;border-left:4px solid var(--or);border-radius:0 14px 14px 0;padding:14px 18px;color:#7c2d12;font-size:.92rem;margin-top:22px}
+/* применение */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.app{background:#fff;border:1px solid #f3e8d0;border-radius:16px;padding:20px}
+.app b{display:block;margin-bottom:6px}
+.app span{font-size:.88rem;color:var(--mut)}
+/* CTA */
+.pcta{background:#111827;color:#fff;text-align:center;padding:70px 0}
+.pcta h2{margin-bottom:10px}
+.pcta p{color:#9ca3af;margin-bottom:24px}
+.pcta a.btn{display:inline-block;background:linear-gradient(90deg,#f59e0b,#f97316);color:#fff;border-radius:999px;padding:14px 34px;font-weight:700;text-decoration:none}
+/* подвал */
+footer{background:#111827;color:#9ca3af;padding:34px 0;border-top:1px solid #1f2937;text-align:center;font-size:.9rem}
+footer a{color:#d1d5db;text-decoration:none;margin:0 10px}
+footer a:hover{color:#fbbf24}
+</style>
+</head>
+<body>
+
+<header><div class="wrap hrow">
+<a class="logo grad" href="index.html" translate="no">GOLDEN AGE</a>
+<nav>
+<a href="index.html">Главная</a>
+<a class="on" href="technologies.html">Технологии</a>
+<a href="path.html">Путь компании</a>
+</nav>
+<a class="cta" href="index.html#contact">Связаться</a>
+</div></header>
+
+<div class="phero"><div class="wrap">
+<h1>Технологии <span class="grad">подробно</span></h1>
+<p>Как работают установки «Импульс», «Гром» и «Бриллиант», чем они отличаются от традиционных решений и какую экономику дают.</p>
+</div></div>
+
+<!-- ИМПУЛЬС -->
+<section id="impulse"><div class="wrap">
+<span class="badge">Импульс</span>
+<h2>Импульсно-лучевая обработка</h2>
+<p class="sub">Активация минерального сырья перед выщелачиванием</p>
+<div class="cols">
+<div class="card">
+<h3>Как это работает</h3>
+<p style="color:#374151;margin-top:10px">В результате микросекундного воздействия минерал вокруг металла быстро нагревается. Из-за разности коэффициентов теплового расширения металлов и минералов внутри зерна образуются зоны повышенной напряжённости. При термическом разложении минералов выделяется дополнительная энергия, разрывающая зерно и высвобождающая металл — вплоть до самородков микронных размеров.</p>
+</div>
+<div class="card">
+<h3>Что даёт обработка</h3>
+<ul class="tick">
+<li>Активация сырья — рост химической активности при выщелачивании</li>
+<li>Разделение минералов и разрыхление рудного сырья</li>
+<li>Разложение органики и нестойких соединений</li>
+<li>Снижение затрат на дальнейший помол до 20%</li>
+<li>Выход целевых металлов до 98% при выщелачивании в одну стадию</li>
+<li>Вместе с «Громом» — обогащение без химических реагентов</li>
+</ul>
+</div>
+</div>
+<div class="kpis">
+<div class="kpi"><b>до 98%</b><span>выход металлов в одну стадию</span></div>
+<div class="kpi"><b>−20%</b><span>затраты на помол</span></div>
+<div class="kpi"><b>от 50 т/час</b><span>производительность</span></div>
+<div class="kpi"><b>0,95</b><span>коэффициент извлечения (против 0,75 у традиционных)</span></div>
+</div>
+</div></section>
+
+<!-- БРИЛЛИАНТ -->
+<section class="alt" id="brilliant"><div class="wrap">
+<span class="badge">Бриллиант</span>
+<h2>Очистка воды</h2>
+<p class="sub">Развитие технологии «Импульс» для водоподготовки</p>
+<div class="card">
+<p style="color:#374151">Импульсно-лучевая технология хорошо зарекомендовала себя в очистке воды от органических веществ природного и техногенного происхождения. Органика, содержащаяся в воде, проходящей через кварцевую трубу установки, эффективно уничтожается; остатки улавливаются адсорбирующим фильтром. На выходе — бактериологическая чистота воды, соответствующая международным стандартам качества.</p>
+<ul class="tick">
+<li>Уничтожение органических загрязнений без реагентов</li>
+<li>Адсорбирующий фильтр улавливает остатки</li>
+<li>Бактериологическая чистота на выходе</li>
+</ul>
+</div>
+</div></section>
+
+<!-- ГРОМ -->
+<section id="grom"><div class="wrap">
+<span class="badge">Гром</span>
+<h2>Гравитационное обогащение</h2>
+<p class="sub">Извлечение металлов без химических реагентов</p>
+<div class="card" style="margin-bottom:26px">
+<h3>Проблема традиционной добычи</h3>
+<p style="color:#374151;margin-top:10px">При использовании традиционных гидравлических схем намывки золотодобытчики теряют до <b>50% золота</b>, содержащегося в исходной руде. При этом расходы на компенсацию энергозатрат настолько высоки, что ставят результат на грань рентабельности. Частицы теряемого золота — далеко не всегда «пылевидные»: технология «Гром» извлекает и их, и более крупные фракции из уже отработанной породы.</p>
+</div>
+<div class="vs">
+<div class="old">
+<h3>Гидроциклон «Nelson-80»</h3>
+<ol>
+<li>Сложное механическое устройство с центрифугой и электроприводом 75 кВт — порядка 500 000 кВт·ч в год</li>
+<li>Быстро выходит из строя при переработке окисленных хвостов с сульфидными минералами</li>
+<li>Требует чистую воду: работа на оборотной воде выводит аппарат из строя</li>
+<li>Для соблюдения экологических требований нужны очистные сооружения</li>
+</ol>
+</div>
+<div class="new">
+<h3>Наш гидроциклон с восходящим потоком</h3>
+<ol>
+<li>Простейший статичный прибор: без механических деталей и без электроэнергии</li>
+<li>Износостойкие, химически стойкие прозрачные поликарбонаты — работа в агрессивных средах</li>
+<li>Функционирует на оборотной «технической воде», очистные не нужны</li>
+<li>Извлечение выше 95% при существенно более низкой себестоимости</li>
+<li>Извлекает «пылевидное» золото от 16 мкм</li>
+</ol>
+</div>
+</div>
+<div class="kpis">
+<div class="kpi"><b>&gt;95%</b><span>извлечение</span></div>
+<div class="kpi"><b>от 16 мкм</b><span>пылевидное золото</span></div>
+<div class="kpi"><b>в 5 раз</b><span>ниже затраты электроэнергии и ГСМ</span></div>
+<div class="kpi"><b>от 10 т/час</b><span>производительность</span></div>
+<div class="kpi"><b>0</b><span>химических реагентов</span></div>
+</div>
+</div></section>
+
+<!-- ПРИМЕНЕНИЕ -->
+<section class="alt" id="apply"><div class="wrap">
+<h2>Области применения «Грома»</h2>
+<p class="sub">Основные и дополнительные направления</p>
+<div class="grid3">
+<div class="app"><b>Россыпные месторождения</b><span>Золото и платина с попутной добычей серебра</span></div>
+<div class="app"><b>Хвосты шлихообогатительных установок</b><span>Золотосодержащие хвосты ШОУ</span></div>
+<div class="app"><b>Отработанные прииски</b><span>Переработка головок при добыче методом отмывки</span></div>
+<div class="app"><b>Хвосты флотации</b><span>Обогатительных фабрик</span></div>
+<div class="app"><b>Золошлаковые отвалы ТЭЦ</b><span>Извлечение металлов из отходов энергетики</span></div>
+<div class="app"><b>Экологическая очистка</b><span>Отходы, загрязнённые тяжёлыми металлами (например, ртутью)</span></div>
+<div class="app"><b>Рудное золото</b><span>Замена флотомашин, использующих химические реагенты</span></div>
+</div>
+</div></section>
+
+<!-- ЭКОНОМИКА -->
+<section id="economics"><div class="wrap">
+<h2>Экономика проекта</h2>
+<p class="sub">Показатели экономической эффективности («Импульс»)</p>
+<div class="kpis">
+<div class="kpi"><b>1 155 255 тыс. ₽</b><span>необходимые инвестиции</span></div>
+<div class="kpi"><b>539 222 тыс. ₽</b><span>NPV — чистая приведённая стоимость</span></div>
+<div class="kpi"><b>284%</b><span>IRR — доходность проекта, % годовых</span></div>
+<div class="kpi"><b>13 мес.</b><span>срок окупаемости</span></div>
+<div class="kpi"><b>18,23%</b><span>принятая ставка дисконтирования</span></div>
+<div class="kpi"><b>13%</b><span>точка безубыточности — от максимальной выручки</span></div>
+</div>
+<div class="note">Стоимость установок «Импульс» и «Гром» — по запросу. Напишите нам, и мы подготовим расчёт под вашу задачу.</div>
+</div></section>
+
+<!-- РЫНОК -->
+<section class="alt" id="market"><div class="wrap">
+<h2>Рынок</h2>
+<p class="sub">Почему технологии востребованы</p>
+<div class="cols">
+<div class="card">
+<h3>Резервы отрасли</h3>
+<p style="color:#374151;margin-top:10px">При традиционной намывке теряется до 50% золота — эти потери лежат в отвалах и хвостохранилищах по всей стране. Переработка техногенных отходов и отработанных приисков — готовый ресурс, не требующий разведки новых месторождений.</p>
+</div>
+<div class="card">
+<h3>Экономика добычи</h3>
+<p style="color:#374151;margin-top:10px">Рост энергозатрат делает традиционное обогащение всё менее рентабельным. Технологии со снижением энергопотребления в разы и работой без химических реагентов отвечают и на экономические, и на экологические требования отрасли.</p>
+</div>
+</div>
+</div></section>
+
+<!-- С ЧЕГО НАЧАТЬ -->
+<section id="start"><div class="wrap">
+<h2>С чего начать</h2>
+<p class="sub">Что нужно для оценки рентабельности на вашей локации</p>
+<div class="card">
+<ul class="tick">
+<li>Химический и минералогический состав руды или техногенного образования</li>
+<li>Физические характеристики минералов и оксидов: крупность зёрен по классам, твёрдость</li>
+<li>Геологические сведения о рудах и способе их обогащения</li>
+<li>Объёмы лежалых и текущих отходов</li>
+</ul>
+<p style="color:var(--mut);font-size:.9rem;margin-top:14px">Желательно также: сведения о воздействии отходов на окружающую среду, близость населённых пунктов, заинтересованность местных властей в переработке отходов и рекультивации земель.</p>
+</div>
+</div></section>
+
+<div class="pcta">
+<div class="wrap">
+<h2>Готовы обсудить внедрение?</h2>
+<p>Пришлите данные по вашей локации — подготовим предварительную оценку</p>
+<a class="btn" href="index.html#contact">Связаться с нами</a>
+</div>
+</div>
+
+<footer><div class="wrap">
+<div style="margin-bottom:10px">
+<a href="index.html">Главная</a> · <a href="technologies.html">Технологии подробно</a> · <a href="path.html">Путь компании</a>
+</div>
+© 2012–2026 Golden Age. Все права защищены.
+</div></footer>
+
+</body>
+</html>
